@@ -28,7 +28,9 @@ RandomNumbers.prototype.init = function() {
 
 RandomNumbers.prototype.render = function() {
     const container = this.getDOMElement();
-
+    while(container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
     this.numbers.forEach(function(number) {
         const listElement = document.createElement('li');
         listElement.classList.add('list-group-item');
