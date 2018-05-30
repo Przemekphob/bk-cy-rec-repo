@@ -1,8 +1,7 @@
-const allNumbers = [];
-
 function RandomNumbers(selector) {
     Component.call(this, selector);
     this.numbers = [];
+    this.allNumbers = [];
 }
 
 RandomNumbers.prototype = Object.create(Component.prototype);
@@ -15,8 +14,9 @@ RandomNumbers.prototype.init = function() {
         axios.get('http://localhost:3000/random-numbers')
         .then(function(response) {
             self.numbers = response.data.data.map(function(number) {
-                allNumbers.push(number);
-                console.log(allNumbers);
+                self.allNumbers.push(number);
+                console.log(self.allNumbers);
+
                 return {
                     id: number,
                 }
@@ -27,8 +27,8 @@ RandomNumbers.prototype.init = function() {
             console.error(error);
         });
     }
-    for (let i = 0; i < 5; i++) {
-        setTimeout(GetNumbers, 10);
+    for (let i = 0; i < 1; i++) {
+        setTimeout(GetNumbers, 0);
     }
     setInterval(GetNumbers, 10000);
 };
