@@ -1,6 +1,7 @@
 function Ranking(selector) {
     Component.call(this, selector);
     this.numbers = [];
+    this.counter = [];
 }
 
 Ranking.prototype = Object.create(Component.prototype);
@@ -8,6 +9,7 @@ Ranking.constructor = Ranking;
 
 Ranking.prototype.init = function() {
     const self = this;
+    self.counter = [0,0,0,0,0,0,0,0,0,0];
 
     axios.get('http://localhost:3000/numbers')
     .then(function(response) {
@@ -26,7 +28,9 @@ Ranking.prototype.init = function() {
 
 Ranking.prototype.render = function() {
     const container = this.getDOMElement();
-
+    while(container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
     this.numbers.forEach(function(number) {
         const listElement = document.createElement('li');
         listElement.classList.add('list-group-item');
