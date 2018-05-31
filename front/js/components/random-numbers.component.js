@@ -18,7 +18,7 @@ RandomNumbers.prototype.init = function() {
                 console.log(self.allNumbers);
 
                 return {
-                    id: number,
+                    id: number
                 }
             });
             self.render();
@@ -27,9 +27,8 @@ RandomNumbers.prototype.init = function() {
             console.error(error);
         });
     }
-    for (let i = 0; i < 1; i++) {
-        setTimeout(GetNumbers, 0);
-    }
+    setTimeout(GetNumbers, 0);
+    
     setInterval(GetNumbers, 10000);
 };
 
@@ -45,4 +44,5 @@ RandomNumbers.prototype.render = function() {
 
         container.appendChild(listElement);
     });
+
 };
