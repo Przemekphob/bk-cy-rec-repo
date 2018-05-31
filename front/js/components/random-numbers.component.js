@@ -10,26 +10,23 @@ RandomNumbers.constructor = RandomNumbers;
 RandomNumbers.prototype.init = function() {
     const self = this;
     
-    let GetNumbers = function () {
-        axios.get('http://localhost:3000/random-numbers')
-        .then(function(response) {
-            self.numbers = response.data.data.map(function(number) {
-                self.allNumbers.push(number);
-                console.log(self.allNumbers);
+    axios.get('http://localhost:3000/random-numbers')
+    .then(function(response) {
+        self.numbers = response.data.data.map(function(number) {
+            self.allNumbers.push(number);
+            //console.log(self.allNumbers);
 
-                return {
-                    id: number
-                }
-            });
-            self.render();
-        })
-        .catch(function(error) {
-            console.error(error);
+            return {
+                id: number
+            }
         });
-    }
-    setTimeout(GetNumbers, 0);
+        self.render();
+    })
+    .catch(function(error) {
+        console.error(error);
+    });
     
-    setInterval(GetNumbers, 10000);
+
 };
 
 RandomNumbers.prototype.render = function() {
