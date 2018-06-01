@@ -1,17 +1,25 @@
 const ranking = new Ranking('#numbers-ranking');
 const randomNumbers = new RandomNumbers('#random-numbers');
 
+randomNumbers.init();
 ranking.init();
+
 const interval = function()
 {
-	let count = {};
-    randomNumbers.allNumbers.forEach(function(i) { count[i] = (count[i]||0) + 1;});
-    console.log(count);
-	randomNumbers.init();
-	ranking.render();
+	randomNumbers.fetchNewNumbers()
+		.then(function(){
+			console.log('got new numbers; updating ranking...');
+			ranking.updateRanking(randomNumbers.numbers);
 
-
+			console.log('rendering...');
+			randomNumbers.render();
+			ranking.render();
+		});
 }
-setInterval(interval,10000);
 
+ranking.fetchNewNumbers()
+	.then(function() {
+		interval();
 
+		setInterval(interval, 10000);
+	});
